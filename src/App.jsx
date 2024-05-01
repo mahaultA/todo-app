@@ -15,7 +15,16 @@ export default function App() {
 
       <div className="todo-list">
         {todos.map((todo, i) => (
-          <Todo key={todo + i}>{todo}</Todo>
+          <Todo
+            onDelete={() => {
+              setTodos((prev) => {
+                return prev.filter((_, y) => i !== y);
+              });
+            }}
+            key={i}
+          >
+            {todo}
+          </Todo>
         ))}
       </div>
     </div>
@@ -51,12 +60,12 @@ const Button = ({ children, ...props }) => {
   );
 };
 
-const Todo = ({ children }) => {
+const Todo = ({ children, onDelete }) => {
   return (
     <div className="todo-wrapper">
       <Checkbox />
       <label className="todo-text">{children}</label>
-      <button className="todo-delete">
+      <button onClick={onDelete} className="todo-delete">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
