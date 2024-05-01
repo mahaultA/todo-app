@@ -37,6 +37,7 @@ const Form = ({ addTodo }) => {
 
     const todoText = event.currentTarget.elements.todoToAdd.value;
     addTodo(todoText);
+    event.currentTarget.reset();
   };
 
   return (
