@@ -11,32 +11,24 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
+.app-wrapper {
+  background-color: #383737;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+input {
+  border-radius: 5px;
+}
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.checkbox {
+  background-color: black;
+  border-radius: 5px;
+  padding: 2rem;
 }

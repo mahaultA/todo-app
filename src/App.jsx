@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-wrapper">
+      <h1>Tasks</h1>
+
+      <Form />
+
+      <Todo />
+    </div>
+  );
 }
 
-export default App
+const Form = () => {
+  return (
+    <form className="form-wrapper">
+      <input className="input" type="text" placeholder="Add a task" />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+};
+
+const Button = ({ children, ...props }) => {
+  return (
+    <button className="button" {...props}>
+      {children}
+    </button>
+  );
+};
+
+const Todo = () => {
+  return (
+    <div>
+      <Checkbox />
+    </div>
+  );
+};
+
+const Checkbox = () => {
+  return <div className="checkbox"></div>;
+};
