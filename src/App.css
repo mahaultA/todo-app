@@ -87,6 +87,7 @@ html {
   display: flex;
   border-radius: 8px;
   gap: 8px;
+  align-items: center;
 }
 
 .todo-wrapper > .todo-text {

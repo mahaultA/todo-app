@@ -2,21 +2,42 @@ import "./App.css";
 import { useState } from "react";
 
 export default function App() {
+  const [todos, setTodos] = useState([]);
   return (
     <div className="app-wrapper">
       <h1>Tasks</h1>
 
-      <Form />
+      <Form
+        addTodo={(todo) => {
+          setTodos((prev) => [...prev, todo]);
+        }}
+      />
 
-      <Todo>Tache 1</Todo>
+      <div className="todo-list">
+        {todos.map((todo, i) => (
+          <Todo key={todo + i}>{todo}</Todo>
+        ))}
+      </div>
     </div>
   );
 }
 
-const Form = () => {
+const Form = ({ addTodo }) => {
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    const todoText = event.currentTarget.elements.todoToAdd.value;
+    addTodo(todoText);
+  };
+
   return (
-    <form className="form-wrapper">
-      <input className="input" type="text" placeholder="Add a task" />
+    <form className="form-wrapper" onSubmit={onSubmit}>
+      <input
+        id="todoToAdd"
+        className="input"
+        type="text"
+        placeholder="Add a task"
+      />
       <Button type="submit">Submit</Button>
     </form>
   );
