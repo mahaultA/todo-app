@@ -109,6 +109,10 @@ html {
   color: var(--text-secondary-color);
 }
 
+.checkbox:focus-within {
+  border-color: white;
+}
+
 .checkbox > input {
   opacity: 0;
   position: absolute;
