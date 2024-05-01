@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 
 export default function App() {
   return (
@@ -38,5 +39,30 @@ const Todo = () => {
 };
 
 const Checkbox = () => {
-  return <div className="checkbox"></div>;
+  const [checked, setChecked] = useState(false);
+
+  const onChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  return (
+    <div className="checkbox">
+      <input type="checkbox" checked={checked} onChange={onChange} />
+      {checked && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      )}
+    </div>
+  );
 };
