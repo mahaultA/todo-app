@@ -3,6 +3,14 @@ import { useState } from "react";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
+  const handleDelete = (index) => {
+    setTodos((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleEdit = (index, newText) => {
+    setTodos((prev) => prev.map((todo, i) => (i === index ? newText : todo)));
+  };
+
   return (
     <div className="app-wrapper">
       <h1>Tasks</h1>
@@ -16,12 +24,9 @@ export default function App() {
       <div className="todo-list">
         {todos.map((todo, i) => (
           <Todo
-            onDelete={() => {
-              setTodos((prev) => {
-                return prev.filter((_, y) => i !== y);
-              });
-            }}
-            key={i}
+            key={todo + i}
+            onDelete={() => handleDelete(i)}
+            onEdit={(newText) => handleEdit(i, newText)}
           >
             {todo}
           </Todo>
@@ -61,11 +66,32 @@ const Button = ({ children, ...props }) => {
   );
 };
 
-const Todo = ({ children, onDelete }) => {
+const Todo = ({ children, onDelete, onEdit }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState(children);
+
+  const handleSave = () => {
+    onEdit(text);
+    setIsEditing(false);
+  };
+
   return (
     <div className="todo-wrapper">
       <Checkbox />
-      <label className="todo-text">{children}</label>
+      {isEditing ? (
+        <input
+          className="todo-text-input"
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onBlur={handleSave}
+          autoFocus
+        />
+      ) : (
+        <label className="todo-text" onClick={() => setIsEditing(true)}>
+          {children}
+        </label>
+      )}
       <button onClick={onDelete} className="todo-delete">
         <svg
           xmlns="http://www.w3.org/2000/svg"
